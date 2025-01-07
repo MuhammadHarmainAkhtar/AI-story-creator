@@ -2,4 +2,3 @@ used Next with React, tailwindcss and nextui (library of tailwindcss) for front 
 s
 s
 s
-s
