@@ -1,1 +1,1 @@
-used Next with React, tailwindcss and nextui (library of tailwindcss) for front end, clerk for OAuth and postgresql using drizzle ORM and NEON.
+used Next with React and TypeScript, tailwindcss and nextui (library of tailwindcss) for front end, clerk for OAuth and postgresql using drizzle ORM and NEON. Flaticon.com for gifs.
