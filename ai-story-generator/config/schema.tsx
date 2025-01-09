@@ -8,4 +8,8 @@ export const StoryData = pgTable("storyData", {
   imageStyle: varchar("imageStyle"),
   output: json("output"),
   coverImage: varchar("coverImage"),
+  userEmail: varchar("userEmail"),
+  userName: varchar("userName"),
+  userImage: varchar("userImage"),
+   
 });
