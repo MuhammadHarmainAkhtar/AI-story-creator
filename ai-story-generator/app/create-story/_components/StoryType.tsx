@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
+import { UserSelectionProps } from "@/app/types";
 
 export interface optionField {
   label: string;
   imageURL: string;
   isFree: boolean;
 }
-const StoryType = ({userSelection}:any) => {
+const StoryType = ({ userSelection }: UserSelectionProps) => {
   const optionList = [
     {
       label: "Story book",

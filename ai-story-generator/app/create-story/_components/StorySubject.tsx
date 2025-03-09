@@ -1,6 +1,8 @@
 import React from "react";
 import {Textarea} from "@nextui-org/input"
-const StorySubject = ({userSelection}:any) => {
+import { UserSelectionProps } from "@/app/types";
+
+const StorySubject = ({ userSelection }: UserSelectionProps) => {
   return (
     <div>
       <label className="text-4xl font-bold" htmlFor="">1. Subject of the story</label>

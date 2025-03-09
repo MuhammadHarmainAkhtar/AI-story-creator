@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { optionField } from "./StoryType";
+import { UserSelectionProps } from "@/app/types";
 
-const ImageStyle = ({ userSelection }: any) => {
+const ImageStyle = ({ userSelection }: UserSelectionProps) => {
   const optionList = [
     {
       label: "3D Cartoon",

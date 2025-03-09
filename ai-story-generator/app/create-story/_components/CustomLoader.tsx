@@ -8,11 +8,15 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import Image from "next/image";
-const CustomLoader = ({ loading }: any) => {
+import { LoaderProps } from "@/app/types";
+
+const CustomLoader = ({ loading }: LoaderProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  
   useEffect(() => {
     onOpen();
-  }, []);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  }, [onOpen]);
+
   return (
     <div>
       {loading && (
@@ -27,7 +31,7 @@ const CustomLoader = ({ loading }: any) => {
               <>
                 <ModalBody className="p-5 flex justify-center items-center text-center">
                   <Image
-                    src={"/magic-hat.gif"}
+                    src="/magic-hat.gif"
                     alt="loader"
                     width={900}
                     height={900}

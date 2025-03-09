@@ -1,4 +1,5 @@
-import { pgTable, serial, text, varchar, json } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, json, timestamp } from "drizzle-orm/pg-core";
+
 export const StoryData = pgTable("storyData", {
   id: serial("id").primaryKey(),
   storyId: varchar("storyId"),
@@ -11,5 +12,5 @@ export const StoryData = pgTable("storyData", {
   userEmail: varchar("userEmail"),
   userName: varchar("userName"),
   userImage: varchar("userImage"),
-   
+  createdAt: timestamp("createdAt").defaultNow(),
 });

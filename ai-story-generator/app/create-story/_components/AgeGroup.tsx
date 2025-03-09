@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { optionField } from "./StoryType";
+import { UserSelectionProps } from "@/app/types";
 
-const AgeGroup = ({userSelection}:any) => {
+const AgeGroup = ({ userSelection }: UserSelectionProps) => {
   const optionList = [
     {
       label: "0-2 Years",
