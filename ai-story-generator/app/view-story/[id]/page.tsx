@@ -206,7 +206,7 @@ function ViewStory() {
       {/* Book Section */}
       <div className="max-w-5xl mx-auto">
         <Card className="glass p-2 sm:p-4 md:p-8">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-6">
             <div
               className="w-full max-w-3xl mx-auto"
               style={{ height: window.innerWidth < 640 ? "380px" : "500px" }}
@@ -289,18 +289,18 @@ function ViewStory() {
             </div>
 
             {/* Navigation Controls */}
-            <div className="flex justify-center gap-2 sm:gap-4 mt-4">
+            <div className="flex justify-center gap-4 mt-4">
               <Button
                 className="bg-primary/10 text-primary hover:bg-primary/20"
                 onClick={() => bookRef.current?.pageFlip().flipPrev()}
-                size="sm"
+                size="lg"
               >
                 Previous
               </Button>
               <Button
                 className="bg-primary text-white"
                 onClick={() => bookRef.current?.pageFlip().flipNext()}
-                size="sm"
+                size="lg"
               >
                 Next
               </Button>
