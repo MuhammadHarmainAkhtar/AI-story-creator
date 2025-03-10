@@ -14,7 +14,10 @@ import Link from "next/link";
 interface ChapterContent {
   chapters: Array<{
     chapter_title: string;
-    story_text: string;
+    story_text?: string;
+    story?: string;
+    chapter_text?: string;
+    content?: string;
     moral?: string;
   }>;
 }
@@ -98,16 +101,19 @@ function ViewStory() {
               storyContent.forEach((story) => {
                 // Add chapter title page
                 story.chapters.forEach((chapter, chapterIndex) => {
+                  // Get story text from any of the possible field names
+                  const storyText = chapter.story_text || chapter.story || chapter.chapter_text || chapter.content || '';
+                  
                   formattedPages.push({
                     type: "chapter",
                     chapterNumber: chapterIndex + 1,
                     chapterTitle: chapter.chapter_title,
-                    content: [chapter.story_text],
+                    content: [storyText],
                   });
 
                   // Split chapter text into paragraphs
-                  if (chapter.story_text) {
-                    const paragraphs = chapter.story_text
+                  if (storyText) {
+                    const paragraphs = storyText
                       .split(/\n+/)
                       .map((p: string) => p.trim())
                       .filter((p: string) => p.length > 0);

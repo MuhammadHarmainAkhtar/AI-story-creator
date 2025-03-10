@@ -1,5 +1,4 @@
 import { SignIn } from "@clerk/nextjs";
-import { div } from "framer-motion/client";
 import Image from "next/image";
 
 export default function Page() {
