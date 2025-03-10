@@ -17,6 +17,7 @@ interface ChapterContent {
     story_text?: string;
     story?: string;
     chapter_text?: string;
+    storyText?: string;
     content?: string;
     moral?: string;
   }>;
@@ -83,31 +84,66 @@ function ViewStory() {
             if (typeof storyData.output === "string") {
               try {
                 storyContent = JSON.parse(storyData.output);
-                console.log("Parsed content:", storyContent);
-              } catch {
-                console.error("Failed to parse story output");
+                console.log("Parsed content structure:", {
+                  isArray: Array.isArray(storyContent),
+                  length: storyContent?.length,
+                  firstItem: storyContent?.[0],
+                  hasChapters: storyContent?.[0]?.chapters,
+                  chaptersLength: storyContent?.[0]?.chapters?.length
+                });
+              } catch (error) {
+                console.error("Failed to parse story output:", error);
                 return;
               }
             } else {
               storyContent = storyData.output as ChapterContent[];
+              console.log("Non-string output structure:", {
+                isArray: Array.isArray(storyContent),
+                length: storyContent?.length,
+                firstItem: storyContent?.[0],
+                hasChapters: storyContent?.[0]?.chapters,
+                chaptersLength: storyContent?.[0]?.chapters?.length
+              });
             }
 
             const formattedPages: StoryPage[] = [];
 
             // Process each chapter
             if (Array.isArray(storyContent)) {
-              console.log("Processing array of chapters:", storyContent);
-
+              let globalChapterIndex = 0;
               storyContent.forEach((story) => {
-                // Add chapter title page
-                story.chapters.forEach((chapter, chapterIndex) => {
-                  // Get story text from any of the possible field names
-                  const storyText = chapter.story_text || chapter.story || chapter.chapter_text || chapter.content || '';
+                // Get all chapters, regardless of structure
+                const chapters = story.chapters || [story];
+                
+                chapters.forEach((chapter) => {
+                  // Find the first string value that's not chapter_title or moral
+                  const storyText = Object.entries(chapter).reduce((text, [key, value]) => {
+                    if (['chapter_title', 'moral', 'image_prompt', 'imagePrompt', 'prompt'].includes(key)) return text;
+                    if (typeof value === 'string' && value.trim().length > 0) {
+                      // Filter out any content that looks like an image prompt
+                      const cleanText = value
+                        .split('\n')
+                        .filter(line => {
+                          const lowerLine = line.toLowerCase();
+                          return !lowerLine.includes('image prompt') && 
+                                 !lowerLine.includes('prompt:') && 
+                                 !lowerLine.includes('generate an image') &&
+                                 !lowerLine.includes('create an image') &&
+                                 !lowerLine.includes('illustration:') &&
+                                 !lowerLine.includes('image:');
+                        })
+                        .join('\n')
+                        .trim();
+                      
+                      return cleanText || text;
+                    }
+                    return text;
+                  }, '');
                   
                   formattedPages.push({
                     type: "chapter",
-                    chapterNumber: chapterIndex + 1,
-                    chapterTitle: chapter.chapter_title,
+                    chapterNumber: globalChapterIndex + 1,
+                    chapterTitle: chapter.chapter_title || `Chapter ${globalChapterIndex + 1}`,
                     content: [storyText],
                   });
 
@@ -143,11 +179,14 @@ function ViewStory() {
                       });
                     }
                   }
+                  globalChapterIndex++;
                 });
               });
 
               console.log("Final formatted pages:", formattedPages);
               setStoryPages(formattedPages);
+            } else {
+              console.error("Story content is not an array:", storyContent);
             }
           }
         }
