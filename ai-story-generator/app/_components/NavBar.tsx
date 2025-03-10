@@ -141,6 +141,7 @@ export function Navbar() {
                   : "text-foreground/60 hover:text-foreground hover:bg-foreground/10"
               }`}
               href={item.href}
+              onClick={() => setIsMenuOpen(false)}
             >
               <span className="relative z-10">{item.name}</span>
               {isActive(item.href) && (
@@ -163,6 +164,7 @@ export function Navbar() {
               href="/sign-in"
               variant="flat"
               size="lg"
+              onClick={() => setIsMenuOpen(false)}
             >
               Sign In
             </Button>

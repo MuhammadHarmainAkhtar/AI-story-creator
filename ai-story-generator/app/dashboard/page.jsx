@@ -25,11 +25,11 @@ function formatDate(date) {
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Yesterday";
   if (diffDays < 7) return `${diffDays} days ago`;
-  
-  return storyDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
+
+  return storyDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 }
 
@@ -46,7 +46,9 @@ export default function Dashboard() {
           const result = await db
             .select()
             .from(StoryData)
-            .where(eq(StoryData.userEmail, user.primaryEmailAddress.emailAddress));
+            .where(
+              eq(StoryData.userEmail, user.primaryEmailAddress.emailAddress)
+            );
           setStories(result);
         }
       } catch (error) {
@@ -124,10 +126,7 @@ export default function Dashboard() {
             >
               Your Magical Collection
             </motion.h1>
-            <motion.p
-              className="text-gray-400 text-lg"
-              variants={itemVariants}
-            >
+            <motion.p className="text-gray-400 text-lg" variants={itemVariants}>
               {stories.length > 0
                 ? `You have created ${stories.length} wonderful ${
                     stories.length === 1 ? "story" : "stories"
@@ -136,15 +135,15 @@ export default function Dashboard() {
             </motion.p>
           </div>
           <motion.div variants={itemVariants}>
-            <Link href="/create-story">
-              <Button
-                className="bg-gradient-to-r from-primary to-purple-500 text-white shadow-lg hover:shadow-primary/50 transition-all duration-300"
-                size="lg"
-                startContent={<FaPlus />}
-              >
-                Create New Story
-              </Button>
-            </Link>
+            <Button
+              as={Link}
+              href="/create-story"
+              size="lg"
+              startContent={<FaPlus />}
+              className="bg-gradient-to-r from-primary to-purple-500 text-white shadow-lg hover:shadow-primary/50 transition-all duration-300"
+            >
+              Create New Story
+            </Button>
           </motion.div>
         </motion.div>
 
@@ -167,19 +166,19 @@ export default function Dashboard() {
                     Start Your Story Collection
                   </h2>
                   <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-                    Transform your imagination into magical stories that
-                    will captivate young minds. Create your first story and
-                    begin building your collection today.
+                    Transform your imagination into magical stories that will
+                    captivate young minds. Create your first story and begin
+                    building your collection today.
                   </p>
-                  <Link href="/create-story">
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-primary to-purple-500 text-white shadow-lg hover:shadow-primary/50 transition-all duration-300"
-                      startContent={<FaMagic />}
-                    >
-                      Begin Your Journey
-                    </Button>
-                  </Link>
+                  <Button
+                    as={Link}
+                    href="/create-story"
+                    size="lg"
+                    startContent={<FaMagic />}
+                    className="bg-gradient-to-r from-primary to-purple-500 text-white shadow-lg hover:shadow-primary/50 transition-all duration-300"
+                  >
+                    Begin Your Journey
+                  </Button>
                 </div>
               </Card>
             </motion.div>
@@ -192,11 +191,7 @@ export default function Dashboard() {
               animate="visible"
             >
               {stories.map((story, index) => (
-                <motion.div
-                  key={story.storyId}
-                  variants={itemVariants}
-                  layout
-                >
+                <motion.div key={story.storyId} variants={itemVariants} layout>
                   <Link href={`/view-story/${story.storyId}`}>
                     <Card className="group relative overflow-hidden backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-primary/20 transition-all duration-300">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
