@@ -16,7 +16,7 @@ const LandingPage = () => {
             transition={{ duration: 0.5 }}
             className="space-y-6 lg:space-y-8"
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
               Craft Magical Stories for Kids in Minutes
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl">
