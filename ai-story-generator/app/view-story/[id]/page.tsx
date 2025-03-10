@@ -126,11 +126,13 @@ function ViewStory() {
                         .filter(line => {
                           const lowerLine = line.toLowerCase();
                           return !lowerLine.includes('image prompt') && 
-                                 !lowerLine.includes('prompt:') && 
+                                 !lowerLine.includes('image_prompt') && 
+                                 !lowerLine.includes('imagePrompt') && 
+                                 !lowerLine.includes('prompt') && 
                                  !lowerLine.includes('generate an image') &&
                                  !lowerLine.includes('create an image') &&
                                  !lowerLine.includes('illustration:') &&
-                                 !lowerLine.includes('image:') &&
+                                 !lowerLine.includes('image') &&
                                  !lowerLine.includes('dall-e') &&
                                  !lowerLine.includes('stable diffusion') &&
                                  !lowerLine.includes('midjourney') &&
