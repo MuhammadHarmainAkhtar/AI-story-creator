@@ -130,7 +130,20 @@ function ViewStory() {
                                  !lowerLine.includes('generate an image') &&
                                  !lowerLine.includes('create an image') &&
                                  !lowerLine.includes('illustration:') &&
-                                 !lowerLine.includes('image:');
+                                 !lowerLine.includes('image:') &&
+                                 !lowerLine.includes('dall-e') &&
+                                 !lowerLine.includes('stable diffusion') &&
+                                 !lowerLine.includes('midjourney') &&
+                                 !lowerLine.includes('art style') &&
+                                 !lowerLine.includes('style:') &&
+                                 !lowerLine.includes('visual style') &&
+                                 !lowerLine.includes('color scheme') &&
+                                 !lowerLine.includes('composition:') &&
+                                 !lowerLine.includes('background:') &&
+                                 !lowerLine.includes('foreground:') &&
+                                 !lowerLine.includes('lighting:') &&
+                                 !lowerLine.includes('mood:') &&
+                                 !lowerLine.includes('atmosphere:');
                         })
                         .join('\n')
                         .trim();
@@ -140,15 +153,16 @@ function ViewStory() {
                     return text;
                   }, '');
                   
-                  formattedPages.push({
-                    type: "chapter",
-                    chapterNumber: globalChapterIndex + 1,
-                    chapterTitle: chapter.chapter_title || `Chapter ${globalChapterIndex + 1}`,
-                    content: [storyText],
-                  });
+                  // Only add chapter if there's actual story content
+                  if (storyText && storyText.length > 0) {
+                    formattedPages.push({
+                      type: "chapter",
+                      chapterNumber: globalChapterIndex + 1,
+                      chapterTitle: chapter.chapter_title || `Chapter ${globalChapterIndex + 1}`,
+                      content: [storyText],
+                    });
 
-                  // Split chapter text into paragraphs
-                  if (storyText) {
+                    // Split chapter text into paragraphs
                     const paragraphs = storyText
                       .split(/\n+/)
                       .map((p: string) => p.trim())
