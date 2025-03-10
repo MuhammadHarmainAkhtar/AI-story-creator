@@ -1,3 +1,16 @@
+import React from 'react'
+
+const route = () => {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+export default route
+
+
 // import { NextRequest, NextResponse } from "next/server";
 
 // export async function POST(req: NextRequest) {
